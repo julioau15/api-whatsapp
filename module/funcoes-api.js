@@ -110,7 +110,7 @@ const getMensagensContato = (num, nameContact) => {
     contatos['whats-users'].forEach(usuario => {
         if(numero == String(usuario.number)){
             usuario.contacts.forEach(contato => {
-                if(nomeContato.trim().toLowerCase() == String(contato.name).trim().toLowerCase()){
+                if(nomeContato.toLowerCase().replaceAll(" ", "") == String(contato.name).toLowerCase().replaceAll(" ", "")){
                     mensagens.name = contato.name
                     mensagens.description = contato.description
                     mensagens.image = contato.image
