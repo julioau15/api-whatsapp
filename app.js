@@ -7,12 +7,12 @@
 
 /**
  * END-POINTS:
- *  () Listar todos os dados de usuário independente do número
- *  () Listar dados da conta do profile do usuário filtrando pelo número
- *  () Listar dados de contato para cada usuário filtrando pelo número
- *  () Listar todas as mensagens trocadas de uma conta de usuário filtrando pelo número
- *  () Listar as mensagens trocadas de uma conta com um contato
- *  () Filtro de mensagens por palavras-chave
+ *  (/v1/senai/usuarios) Listar todos os dados de usuário independente do número
+ *  (/v1/senai/usuarios/profile/) Listar dados da conta do profile do usuário filtrando pelo número
+ *  (/v1/senai/usuarios/contatos/) Listar dados de contato para cada usuário filtrando pelo número
+ *  (/v1/senai/usuarios/mensagens/) Listar todas as mensagens trocadas de uma conta de usuário filtrando pelo número
+ *  (/v1/senai/usuarios/contatos/mensagens/) Listar as mensagens trocadas de uma conta com um contato
+ *  (/v1/senai/usuarios/mensagens/filtro/) Filtro de mensagens por palavras-chave
  */
 
 const express = require('express')
@@ -53,27 +53,27 @@ const DOC_API = {
         },
         {
             "id": 2,
-            "route 2": '/v1/senai/profile/dados/?numero=11987876567',
+            "route 2": '/v1/senai/usuarios/profile/?numero=11987876567',
             "description":"Retorna os dados de profile do usuário filtrando pelo número."
         },
         {
             "id": 3,
-            "route 3": '/v1/senai/contatos/dados/?numero=11987876567',
+            "route 3": '/v1/senai/usuarios/contatos/?numero=11987876567',
             "description":"Retorna os dados dos contatos do usuário filtrando pelo número."
         },
         {
             "id": 4,
-            "route 4": '/v1/senai/mensagens/usuario/?numero=11987876567',
+            "route 4": '/v1/senai/usuarios/mensagens/?numero=11987876567',
             "description":"Retorna todas mensagens do usuário filtrando pelo número."
         },
         {
             "id": 5,
-            "route 5": '/v1/senai/contato/mensagens/?numero=11987876567&nome=ana%20maria',
+            "route 5": '/v1/senai/usuarios/contatos/mensagens/?numero=11987876567&contato=anamaria',
             "description":"Retorna o histórico de mensagens entre o usuário e um contato filtrando pelo número do usuário e pelo nome do contato."
         }, 
         {
             "id": 6,
-            "route 6": '/v1/senai/filtro/mensagens/?numero=11987876567&palavra=ei!',
+            "route 6": '/v1/senai/usuarios/mensagens/filtro/?numero=11987876567&palavra=ei!',
             "description":"Retorna as mensagens que contenham a palavra chave, filtrando pelo número do usuário e pela palavra."
         }
     ]
@@ -99,7 +99,7 @@ app.get('/v1/senai/usuarios', (req,res) => {
     res.status(200).json(usuarios)
 })
 
-app.get('/v1/senai/profile/dados/', (req,res) => {
+app.get('/v1/senai/usuarios/profile/', (req,res) => {
     let numero = req.query.numero
     let dadosProfile = getProfileUsuario(numero)
     if(dadosProfile){
@@ -109,7 +109,7 @@ app.get('/v1/senai/profile/dados/', (req,res) => {
     }
 })
 
-app.get('/v1/senai/contatos/dados/', (req,res) => {
+app.get('/v1/senai/usuarios/contatos/', (req,res) => {
     let numero = req.query.numero
     let dadosContatos = getContatosUsuario(numero)
     if(dadosContatos){
@@ -119,7 +119,7 @@ app.get('/v1/senai/contatos/dados/', (req,res) => {
     }
 })
 
-app.get('/v1/senai/mensagens/usuario/', (req,res) => {
+app.get('/v1/senai/usuarios/mensagens/', (req,res) => {
     let numero = req.query.numero
     let mensagens = getMensagensUsuario(numero)
     if(mensagens){
@@ -129,9 +129,9 @@ app.get('/v1/senai/mensagens/usuario/', (req,res) => {
     }
 })
 
-app.get('/v1/senai/contato/mensagens/', (req,res) => {
+app.get('/v1/senai/usuarios/contatos/mensagens/', (req,res) => {
     let numero = req.query.numero
-    let nomeContato = req.query.nome
+    let nomeContato = req.query.contato
     let mensagensContato = getMensagensContato(numero, nomeContato)
     if(mensagensContato){
         res.status(200).json(mensagensContato)
@@ -140,7 +140,7 @@ app.get('/v1/senai/contato/mensagens/', (req,res) => {
     }
 })
 
-app.get('/v1/senai/filtro/mensagens/', (req,res) => {
+app.get('/v1/senai/usuarios/mensagens/filtro/', (req,res) => {
     let numero = req.query.numero
     let palavraChave = req.query.palavra
     let filtroMensagens = getFiltroMensagens(numero, palavraChave)
