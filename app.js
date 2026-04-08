@@ -68,7 +68,7 @@ const DOC_API = {
         },
         {
             "id": 5,
-            "route 5": '/v1/senai/contato/mensagens/?numero=11987876567&nome=anamaria',
+            "route 5": '/v1/senai/contato/mensagens/?numero=11987876567&nome=ana%20maria',
             "description":"Retorna o histórico de mensagens entre o usuário e um contato filtrando pelo número do usuário e pelo nome do contato."
         }, 
         {
