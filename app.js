@@ -19,10 +19,10 @@ const express = require('express')
 const cors = require('cors')
 
 const {
-    getListaUsuarios,
-    getDadosProfile,
-    getDadosContatos,
-    getListaMensagens,
+    getUsuarios,
+    getProfileUsuario,
+    getContatosUsuario,
+    getMensagensUsuario,
     getMensagensContato,
     getFiltroMensagens
 } = require('./module/funcoes-api')
@@ -95,13 +95,13 @@ app.get('/v1/senai/help', (req,res) => {
 })
 
 app.get('/v1/senai/usuarios', (req,res) => {
-    let usuarios = getListaUsuarios()
+    let usuarios = getUsuarios()
     res.status(200).json(usuarios)
 })
 
 app.get('/v1/senai/profile/dados/', (req,res) => {
     let numero = req.query.numero
-    let dadosProfile = getDadosProfile(numero)
+    let dadosProfile = getProfileUsuario(numero)
     if(dadosProfile){
         res.status(200).json(dadosProfile)
     }else{
@@ -111,7 +111,7 @@ app.get('/v1/senai/profile/dados/', (req,res) => {
 
 app.get('/v1/senai/contatos/dados/', (req,res) => {
     let numero = req.query.numero
-    let dadosContatos = getDadosContatos(numero)
+    let dadosContatos = getContatosUsuario(numero)
     if(dadosContatos){
         res.status(200).json(dadosContatos)
     }else{
@@ -121,7 +121,7 @@ app.get('/v1/senai/contatos/dados/', (req,res) => {
 
 app.get('/v1/senai/mensagens/usuario/', (req,res) => {
     let numero = req.query.numero
-    let mensagens = getListaMensagens(numero)
+    let mensagens = getMensagensUsuario(numero)
     if(mensagens){
         res.status(200).json(mensagens)
     }else{

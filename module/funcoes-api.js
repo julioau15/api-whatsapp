@@ -7,19 +7,19 @@
 
 /**
  * END-POINTS:
- *  (getListaUsuarios) Listar todos os dados de usuário independente do número
- *  (getDadosProfile) Listar dados da conta do profile do usuário filtrando pelo número
- *  (getDadosContatos) Listar dados de contato para cada usuário filtrando pelo número
- *  (getListaMensagens) Listar todas as mensagens trocadas de uma conta de usuário filtrando pelo número
+ *  (getUsuarios) Listar todos os dados de usuário independente do número
+ *  (getProfileUsuario) Listar dados da conta do profile do usuário filtrando pelo número
+ *  (getContatosUsuario) Listar dados de contato para cada usuário filtrando pelo número
+ *  (getMensagensUsuario) Listar todas as mensagens trocadas de uma conta de usuário filtrando pelo número
  *  (getMensagensContato) Listar as mensagens trocadas de uma conta com um contato
  *  (getFiltroMensagens) Filtro de mensagens por palavras-chave
  */
 
 const contatos = require('./contatos').contatos
 
-const getListaUsuarios = () => contatos
+const getUsuarios = () => contatos
 
-const getDadosProfile = (num) => {
+const getProfileUsuario = (num) => {
     let numero = String(num)
     let dadosProfile = {
         "account":"",
@@ -50,7 +50,7 @@ const getDadosProfile = (num) => {
     return dadosProfile
 }
 
-const getDadosContatos = (num) => {
+const getContatosUsuario = (num) => {
     let numero = String(num)
     let dadosContatos = {"contacts":[]}
     let status = false
@@ -76,7 +76,7 @@ const getDadosContatos = (num) => {
     return dadosContatos   
 }
 
-const getListaMensagens = (num) => {
+const getMensagensUsuario = (num) => {
     let numero = String(num)
     let mensagens = {"messages":[]}
     let status = false
@@ -157,10 +157,10 @@ const getFiltroMensagens = (num, palavra) => {
 }
 
 module.exports = {
-    getListaUsuarios,
-    getDadosProfile,
-    getDadosContatos,
-    getListaMensagens,
+    getUsuarios,
+    getProfileUsuario,
+    getContatosUsuario,
+    getMensagensUsuario,
     getMensagensContato,
     getFiltroMensagens
 }
