@@ -12,7 +12,7 @@
  *  (getDadosContatos) Listar dados de contato para cada usuário filtrando pelo número
  *  (getListaMensagens) Listar todas as mensagens trocadas de uma conta de usuário filtrando pelo número
  *  (getMensagensContato) Listar as mensagens trocadas de uma conta com um contato
- *  (getFiltroPalavraChave) Filtro de mensagens por palavras-chave
+ *  (getFiltroMensagens) Filtro de mensagens por palavras-chave
  */
 
 const contatos = require('./contatos').contatos
@@ -129,7 +129,7 @@ const getMensagensContato = (num, nameContact) => {
     return mensagens  
 }
 
-const getFiltroPalavraChave = (num, palavra) => {
+const getFiltroMensagens = (num, palavra) => {
     let numero = String(num)
     let palavraChave = String(palavra)
     let mensagens = {
@@ -154,4 +154,13 @@ const getFiltroPalavraChave = (num, palavra) => {
         return status
     
     return mensagens
+}
+
+module.exports = {
+    getListaUsuarios,
+    getDadosProfile,
+    getDadosContatos,
+    getListaMensagens,
+    getMensagensContato,
+    getFiltroMensagens
 }
