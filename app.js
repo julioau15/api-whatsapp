@@ -5,7 +5,7 @@
  * Versão: 1.0
  * ********************************************************************/
 
-/**
+/*
  * END-POINTS:
  *  (/v1/senai/usuarios) Listar todos os dados de usuário independente do número
  *  (/v1/senai/usuarios/profile) Listar dados da conta do profile do usuário filtrando pelo número
@@ -15,9 +15,11 @@
  *  (/v1/senai/usuarios/mensagens/filtro) Filtro de mensagens por palavras-chave
  */
 
+// Import das bibliotecas responsaveis por manipular a API
 const express = require('express')
 const cors = require('cors')
 
+// Import das funções
 const {
     getUsuarios,
     getProfileUsuario,
@@ -27,6 +29,7 @@ const {
     getFiltroMensagens
 } = require('./module/funcoes-api')
 
+// Configuração do CORS
 const corsOptions = {
     origin:["*"],
     methods:"GET",
@@ -39,6 +42,7 @@ const app = express()
 
 app.use(cors(corsOptions))
 
+// Documentação da API
 const DOC_API = {
     "project": "WhatsApp",
     "description":"API para manipular dados de usuarios no WhatApp.",
@@ -79,7 +83,6 @@ const DOC_API = {
     ]
 }
 
-
 // Raiz do projeto sucesso
 app.get('/', (req,res) => {
     res.status(200).json(
@@ -90,15 +93,18 @@ app.get('/', (req,res) => {
     )
 })
 
+// Documentação
 app.get('/v1/senai/help', (req,res) => {
     res.status(200).json(DOC_API)
 })
 
+// retorna todos usuários
 app.get('/v1/senai/usuarios', (req,res) => {
     let usuarios = getUsuarios()
     res.status(200).json(usuarios)
 })
 
+// Retorna dados de Profile de um usuário
 app.get('/v1/senai/usuarios/profile', (req,res) => {
     let numero = req.query.numero
     let dadosProfile = getProfileUsuario(numero)
@@ -109,6 +115,7 @@ app.get('/v1/senai/usuarios/profile', (req,res) => {
     }
 })
 
+// Retorna todos contatos de um usuário
 app.get('/v1/senai/usuarios/contatos', (req,res) => {
     let numero = req.query.numero
     let dadosContatos = getContatosUsuario(numero)
@@ -119,6 +126,7 @@ app.get('/v1/senai/usuarios/contatos', (req,res) => {
     }
 })
 
+// Retorna todas mensagens de um usuário
 app.get('/v1/senai/usuarios/mensagens', (req,res) => {
     let numero = req.query.numero
     let mensagens = getMensagensUsuario(numero)
@@ -129,6 +137,7 @@ app.get('/v1/senai/usuarios/mensagens', (req,res) => {
     }
 })
 
+// Retorna as mensagens de um usuário com um contato
 app.get('/v1/senai/usuarios/contatos/mensagens', (req,res) => {
     let numero = req.query.numero
     let nomeContato = req.query.contato
@@ -140,6 +149,7 @@ app.get('/v1/senai/usuarios/contatos/mensagens', (req,res) => {
     }
 })
 
+// filtra mensagens do usuário que contenham uma palavra-chave informada
 app.get('/v1/senai/usuarios/mensagens/filtro', (req,res) => {
     let numero = req.query.numero
     let palavraChave = req.query.palavra
@@ -161,6 +171,7 @@ app.use((req,res) => {
     )
 })
 
+// Inicia a API
 app.listen(port, (req,res) => {
     console.log(`API WhatsApp no ar.`)
 })

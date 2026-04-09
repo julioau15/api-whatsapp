@@ -5,7 +5,7 @@
  * Versão: 1.0
  * ********************************************************************/
 
-/**
+/*
  * END-POINTS:
  *  (getUsuarios) Listar todos os dados de usuário independente do número
  *  (getProfileUsuario) Listar dados da conta do profile do usuário filtrando pelo número
@@ -15,10 +15,13 @@
  *  (getFiltroMensagens) Filtro de mensagens por palavras-chave
  */
 
+// Import dos dados da API
 const contatos = require('./contatos').contatos
 
+// Retorna todos os usuários
 const getUsuarios = () => contatos
 
+// Retorna dados de Profile de um usuário
 const getProfileUsuario = (num) => {
     let numero = String(num)
     let dadosProfile = {
@@ -50,6 +53,7 @@ const getProfileUsuario = (num) => {
     return dadosProfile
 }
 
+// Retorna todos contatos de um usuário
 const getContatosUsuario = (num) => {
     let numero = String(num)
     let dadosContatos = {"contacts":[]}
@@ -76,6 +80,7 @@ const getContatosUsuario = (num) => {
     return dadosContatos   
 }
 
+// Retorna todas mensagens de um usuário
 const getMensagensUsuario = (num) => {
     let numero = String(num)
     let mensagens = {"messages":[]}
@@ -96,6 +101,7 @@ const getMensagensUsuario = (num) => {
     return mensagens  
 }
 
+// Retorna as mensagens de um usuário com um contato
 const getMensagensContato = (num, nameContact) => {
     let numero = String(num)
     let nomeContato = String(nameContact)
@@ -129,6 +135,7 @@ const getMensagensContato = (num, nameContact) => {
     return mensagens  
 }
 
+// filtra mensagens do usuário que contenham uma palavra-chave informada
 const getFiltroMensagens = (num, palavra) => {
     let numero = String(num)
     let palavraChave = String(palavra)
@@ -156,6 +163,7 @@ const getFiltroMensagens = (num, palavra) => {
     return mensagens
 }
 
+// Export das funções
 module.exports = {
     getUsuarios,
     getProfileUsuario,
